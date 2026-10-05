@@ -367,3 +367,46 @@ document.querySelectorAll('[data-contact]').forEach(button => {
     }
   });
 });
+
+
+const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
+const navSections = navLinks
+  .map(link => {
+    const id = link.getAttribute('href')?.slice(1);
+    const section = id ? document.getElementById(id) : null;
+    return section ? { link, section } : null;
+  })
+  .filter(Boolean);
+
+if (navSections.length) {
+  let navTicking = false;
+
+  const updateActiveNav = () => {
+    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+    const marker = window.scrollY + headerHeight + 24;
+    let active = null;
+
+    for (const item of navSections) {
+      if (item.section.offsetTop <= marker) active = item;
+      else break;
+    }
+
+    navLinks.forEach(link => {
+      const isActive = active?.link === link;
+      if (isActive) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+
+    navTicking = false;
+  };
+
+  const requestNavUpdate = () => {
+    if (navTicking) return;
+    navTicking = true;
+    requestAnimationFrame(updateActiveNav);
+  };
+
+  updateActiveNav();
+  window.addEventListener('scroll', requestNavUpdate, { passive: true });
+  window.addEventListener('resize', requestNavUpdate);
+}
