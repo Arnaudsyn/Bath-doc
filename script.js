@@ -136,7 +136,7 @@ const translations = {
     "q2Detail": "Si la plupart des foyers ont une salle de bain, pourquoi continuer à aller au sentō ? La réponse se trouve peut-être autant dans les habitudes, le travail des propriétaires et la vie du quartier que dans l’eau.",
     "q3Title": "Le voyage aux sources chaudes",
     "q3Question": "Comment le voyage vers les sources chaudes a-t-il changé, et comment les destinations thermales ont-elles changé avec lui ?",
-    "q3Detail": "Des longs séjours thérapeutiques aux escapades plus courtes et au tourisme international, le profil des visiteurs et leurs attentes ont évolué. La question est de savoir si ces évolutions ont un impact sur les villes thermales, de quelle manière et pour qui.",
+    "q3Detail": "De longs séjours thérapeutiques aux escapades plus courtes et au tourisme international, le profil des visiteurs et leurs attentes ont évolué. La question est de savoir si ces évolutions ont un impact sur les villes thermales, de quelle manière et pour qui.",
     "q4Title": "L’auberge",
     "q4Question": "Qu’est-ce qui rend l’hospitalité d’un ryokan possible chaque jour ?",
     "q4Detail": "L’hospitalité est visible pour le client ; le travail qui la rend possible l’est beaucoup moins. Suivre les personnes et les décisions qui fabriquent cette expérience chaque jour.",
