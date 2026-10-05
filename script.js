@@ -397,6 +397,17 @@ if (navSections.length) {
       else link.removeAttribute('aria-current');
     });
 
+    const activeHash = active?.link.getAttribute('href');
+    if (activeHash && location.hash !== activeHash) {
+      const url = new URL(location.href);
+      url.hash = activeHash;
+      history.replaceState(history.state, '', url);
+    } else if (!active && navLinks.some(link => link.getAttribute('href') === location.hash)) {
+      const url = new URL(location.href);
+      url.hash = '';
+      history.replaceState(history.state, '', url);
+    }
+
     navTicking = false;
   };
 
