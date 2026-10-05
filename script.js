@@ -354,31 +354,56 @@ if (projectCta && projectSection) {
   projectCta.addEventListener('click', event => {
     event.preventDefault();
 
-    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
-    const targetTop = Math.max(0, projectSection.offsetTop - headerHeight);
     const isMobile = window.matchMedia('(max-width: 980px)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const getProjectTop = () => {
+      const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+      return Math.max(
+        0,
+        projectSection.getBoundingClientRect().top + window.scrollY - headerHeight
+      );
+    };
+
     if (isMobile) {
-      window.scrollTo(0, targetTop);
+      const root = document.documentElement;
+      const previousInlineScrollBehavior = root.style.scrollBehavior;
+
+      // Mobile Safari can inherit the page-level smooth scrolling even for
+      // programmatic jumps. Disable it briefly so the CTA always lands exactly.
+      root.style.scrollBehavior = 'auto';
+      void root.offsetHeight;
+
+      window.scrollTo({
+        top: getProjectTop(),
+        left: 0,
+        behavior: 'instant'
+      });
 
       requestAnimationFrame(() => {
-        const correctedHeaderHeight = document.querySelector('.site-header')?.offsetHeight || 0;
-        const correctedTop = Math.max(0, projectSection.offsetTop - correctedHeaderHeight);
+        const correctedTop = getProjectTop();
         if (Math.abs(window.scrollY - correctedTop) > 2) {
-          window.scrollTo(0, correctedTop);
+          window.scrollTo({
+            top: correctedTop,
+            left: 0,
+            behavior: 'instant'
+          });
         }
+
+        requestAnimationFrame(() => {
+          root.style.scrollBehavior = previousInlineScrollBehavior;
+        });
       });
     } else {
       window.scrollTo({
-        top: targetTop,
+        top: getProjectTop(),
         behavior: reduceMotion ? 'auto' : 'smooth'
       });
     }
 
     const url = new URL(location.href);
     url.hash = 'project';
-    history.pushState(history.state, '', url);
+    history.replaceState(history.state, '', url);
   });
 }
 
