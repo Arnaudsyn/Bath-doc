@@ -7,6 +7,10 @@ const translations = {
     "navApproach": "Approach",
     "navAbout": "About",
     "navContact": "Contact",
+    "menuOpen": "Ouvrir le menu",
+    "menuClose": "Fermer le menu",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
     "heroEyebrow": "Independent documentary project · Research & pre-production",
     "heroTitle": "Japan Through Bathing Culture",
     "heroStatement": "Exploring Japan’s bathing culture through the people, places and crafts that shape it.",
@@ -209,6 +213,8 @@ const translations = {
     "navApproach": "取材姿勢",
     "navAbout": "制作者",
     "navContact": "連絡",
+    "menuOpen": "メニューを開く",
+    "menuClose": "メニューを閉じる",
     "heroEyebrow": "自主制作ドキュメンタリー · リサーチ／プリプロダクション",
     "heroTitle": "日本の入浴文化を通して見る暮らし",
     "heroStatement": "人、場所、手仕事を通して、日本の入浴文化を見つめる。",
@@ -325,6 +331,11 @@ function applyLanguage(lang, persist=false){
   document.querySelectorAll('[data-lang]').forEach(btn=>{
     btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
   });
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (menuToggle) {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-label', translations[lang][isOpen ? 'menuClose' : 'menuOpen']);
+  }
   if(persist) localStorage.setItem('bath-doc-lang', lang);
   const title = translations[lang].heroTitle;
   document.title = `${title}: ${translations[lang].footerText}`;
@@ -345,6 +356,48 @@ document.querySelectorAll('[data-lang]').forEach(btn=>{
 });
 
 applyLanguage(resolveLanguage());
+
+
+const menuToggle = document.querySelector('.menu-toggle');
+const primaryNav = document.getElementById('primary-navigation');
+
+if (menuToggle && primaryNav) {
+  const setMenuState = open => {
+    menuToggle.setAttribute('aria-expanded', String(open));
+    primaryNav.classList.toggle('is-open', open);
+    const lang = document.documentElement.lang || 'en';
+    menuToggle.setAttribute('aria-label', translations[lang][open ? 'menuClose' : 'menuOpen']);
+  };
+
+  menuToggle.addEventListener('click', () => {
+    setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  primaryNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+      setMenuState(false);
+      menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (
+      menuToggle.getAttribute('aria-expanded') === 'true' &&
+      !primaryNav.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      setMenuState(false);
+    }
+  });
+
+  window.matchMedia('(min-width: 981px)').addEventListener?.('change', event => {
+    if (event.matches) setMenuState(false);
+  });
+}
 
 
 const projectCta = document.querySelector('.hero .text-link[href="#project"]');
