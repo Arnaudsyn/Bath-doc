@@ -2,6 +2,7 @@ const translations = {
   "en": {
     "skip": "Skip to content",
     "navProject": "Project",
+    "navMotivation": "Why",
     "navQuestions": "Questions",
     "navApproach": "Approach",
     "navAbout": "About",
@@ -102,6 +103,7 @@ const translations = {
   "fr": {
     "skip": "Aller au contenu",
     "navProject": "Projet",
+    "navMotivation": "Pourquoi",
     "navQuestions": "Questions",
     "navApproach": "Approche",
     "navAbout": "À propos",
@@ -202,6 +204,7 @@ const translations = {
   "ja": {
     "skip": "本文へ移動",
     "navProject": "企画",
+    "navMotivation": "なぜ",
     "navQuestions": "問い",
     "navApproach": "取材姿勢",
     "navAbout": "制作者",
