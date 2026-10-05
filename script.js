@@ -329,6 +329,29 @@ document.querySelectorAll('[data-lang]').forEach(btn=>{
 applyLanguage(resolveLanguage());
 
 
+const projectCta = document.querySelector('.hero .text-link[href="#project"]');
+const projectSection = document.getElementById('project');
+
+if (projectCta && projectSection) {
+  projectCta.addEventListener('click', event => {
+    event.preventDefault();
+
+    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+    const targetTop = projectSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const url = new URL(location.href);
+    url.hash = 'project';
+    history.pushState(history.state, '', url);
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: reduceMotion ? 'auto' : 'smooth'
+    });
+  });
+}
+
+
 const backToTop = document.querySelector('.back-to-top');
 if (backToTop) {
   const updateBackToTop = () => {
