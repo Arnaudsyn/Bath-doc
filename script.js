@@ -86,7 +86,11 @@ const translations = {
     "closingEyebrow": "An open invitation",
     "closingTitle": "Help me understand it better.",
     "closingText": "The project is still taking shape, and conversations are part of the research. I would be very interested in hearing from people who work with, study, maintain, use or create around Japanese bathing culture. Perspectives that challenge, refine or broaden my current understanding are especially valuable.",
-    "closingNote": "Suggestions of people, places, research or stories are equally welcome. Contact details will be added before the first outreach.",
+    "closingNote": "Suggestions of people, places, research or stories are equally welcome.",
+    "contactEmail": "Email me",
+    "contactWhatsapp": "WhatsApp",
+    "contactQrTitle": "Prefer your phone?",
+    "contactQrText": "Scan this QR code with your camera to open the WhatsApp chat directly.",
     "footerText": "Independent documentary project in development",
     "backTop": "Back to top"
   },
@@ -177,7 +181,11 @@ const translations = {
     "closingEyebrow": "Une invitation ouverte",
     "closingTitle": "Aidez-moi à mieux comprendre.",
     "closingText": "Le projet est encore en construction, et les conversations font partie de la recherche. Je serais très heureux d’échanger avec des personnes qui travaillent, étudient, entretiennent, utilisent ou créent autour de la culture japonaise du bain. Les points de vue qui remettent en question, affinent ou élargissent ma compréhension actuelle sont particulièrement précieux.",
-    "closingNote": "Les suggestions de personnes, de lieux, de recherches ou d’histoires sont tout aussi bienvenues. Les coordonnées seront ajoutées avant les premiers contacts.",
+    "closingNote": "Les suggestions de personnes, de lieux, de recherches ou d’histoires sont tout aussi bienvenues.",
+    "contactEmail": "M’écrire par e-mail",
+    "contactWhatsapp": "WhatsApp",
+    "contactQrTitle": "Vous préférez le téléphone ?",
+    "contactQrText": "Scannez ce QR code avec votre appareil photo pour ouvrir directement la conversation WhatsApp.",
     "footerText": "Projet documentaire indépendant en développement",
     "backTop": "Retour en haut"
   },
@@ -268,7 +276,11 @@ const translations = {
     "closingEyebrow": "開かれたお願い",
     "closingTitle": "もっと深く理解するために。",
     "closingText": "この企画はまだ形づくられている途中であり、対話そのものがリサーチの一部です。日本の入浴文化に関わって働く方、研究する方、維持する方、利用する方、ものをつくる方のお話をぜひ伺いたいと考えています。現在の理解を問い直し、より正確にし、広げてくれる視点は特に大切です。",
-    "closingNote": "人、場所、研究、物語についてのご提案も歓迎しています。最初の連絡を行う前に、ここへ連絡先を追加します。",
+    "closingNote": "人、場所、研究、物語についてのご提案も歓迎しています。",
+    "contactEmail": "メールで連絡",
+    "contactWhatsapp": "WhatsApp",
+    "contactQrTitle": "スマートフォンから連絡しますか？",
+    "contactQrText": "カメラでQRコードを読み取ると、WhatsAppのチャットを直接開けます。",
     "footerText": "制作準備中の自主ドキュメンタリー企画",
     "backTop": "ページ上部へ"
   }
@@ -326,3 +338,32 @@ if (backToTop) {
   updateBackToTop();
   window.addEventListener('scroll', updateBackToTop, { passive: true });
 }
+
+
+const decodeContact = values => String.fromCharCode(...values);
+
+const contactTargets = {
+  email: () => {
+    const local = decodeContact([97,114,110,97,117,100,109,97,114,113,117,101,122]);
+    const domain = decodeContact([103,109,97,105,108,46,99,111,109]);
+    return 'mailto:' + local + '@' + domain;
+  },
+  whatsapp: () => {
+    const number = decodeContact([51,51,54,55,51,49,56,51,54,56,54]);
+    return 'https://wa.me/' + number;
+  }
+};
+
+document.querySelectorAll('[data-contact]').forEach(button => {
+  button.addEventListener('click', () => {
+    const type = button.dataset.contact;
+    const target = contactTargets[type]?.();
+    if (!target) return;
+
+    if (type === 'whatsapp') {
+      window.open(target, '_blank', 'noopener,noreferrer');
+    } else {
+      window.location.href = target;
+    }
+  });
+});
