@@ -337,17 +337,30 @@ if (projectCta && projectSection) {
     event.preventDefault();
 
     const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
-    const targetTop = projectSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+    const targetTop = Math.max(0, projectSection.offsetTop - headerHeight);
+    const isMobile = window.matchMedia('(max-width: 980px)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isMobile) {
+      window.scrollTo(0, targetTop);
+
+      requestAnimationFrame(() => {
+        const correctedHeaderHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+        const correctedTop = Math.max(0, projectSection.offsetTop - correctedHeaderHeight);
+        if (Math.abs(window.scrollY - correctedTop) > 2) {
+          window.scrollTo(0, correctedTop);
+        }
+      });
+    } else {
+      window.scrollTo({
+        top: targetTop,
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
+    }
 
     const url = new URL(location.href);
     url.hash = 'project';
     history.pushState(history.state, '', url);
-
-    window.scrollTo({
-      top: Math.max(0, targetTop),
-      behavior: reduceMotion ? 'auto' : 'smooth'
-    });
   });
 }
 
