@@ -90,7 +90,7 @@ const translations = {
     "contactEmail": "Email me",
     "contactWhatsapp": "Get in touch on WhatsApp",
     "contactQrTitle": "Prefer your phone?",
-    "contactQrText": "Scan this QR code with your camera to open the WhatsApp chat directly.",
+    "contactQrText": "Scan this QR code with your camera to open my WhatsApp contact.",
     "footerText": "Independent documentary project in development",
     "backTop": "Back to top"
   },
@@ -185,7 +185,7 @@ const translations = {
     "contactEmail": "M’écrire par e-mail",
     "contactWhatsapp": "Me contacter sur WhatsApp",
     "contactQrTitle": "Vous préférez le téléphone ?",
-    "contactQrText": "Scannez ce QR code avec votre appareil photo pour ouvrir directement la conversation WhatsApp.",
+    "contactQrText": "Scannez ce QR code avec votre appareil photo pour ouvrir mon contact WhatsApp.",
     "footerText": "Projet documentaire indépendant en développement",
     "backTop": "Retour en haut"
   },
@@ -280,7 +280,7 @@ const translations = {
     "contactEmail": "メールで連絡",
     "contactWhatsapp": "WhatsAppで連絡",
     "contactQrTitle": "スマートフォンから連絡しますか？",
-    "contactQrText": "カメラでQRコードを読み取ると、WhatsAppのチャットを直接開けます。",
+    "contactQrText": "カメラでQRコードを読み取ると、WhatsAppの連絡先を開けます。",
     "footerText": "制作準備中の自主ドキュメンタリー企画",
     "backTop": "ページ上部へ"
   }
