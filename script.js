@@ -297,3 +297,14 @@ document.querySelectorAll('[data-lang]').forEach(btn=>{
 });
 
 applyLanguage(resolveLanguage());
+
+
+const backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+  const updateBackToTop = () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 120);
+  };
+
+  updateBackToTop();
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+}
