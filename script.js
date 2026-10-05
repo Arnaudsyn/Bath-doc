@@ -82,7 +82,7 @@ const translations = {
     "closingText": "The project is still taking shape, and conversations are part of the research. I would be very interested in hearing from people who work with, study, maintain, use or create around Japanese bathing culture. Perspectives that challenge, refine or broaden my current understanding are especially valuable.",
     "closingNote": "Suggestions of people, places, research or stories are equally welcome. Contact details will be added before the first outreach.",
     "footerText": "Independent documentary project in development",
-    "backTop": "Back to top ↑"
+    "backTop": "Back to top"
   },
   "fr": {
     "skip": "Aller au contenu",
@@ -167,7 +167,7 @@ const translations = {
     "closingText": "Le projet est encore en construction, et les conversations font partie de la recherche. Je serais très heureux d’échanger avec des personnes qui travaillent, étudient, entretiennent, utilisent ou créent autour de la culture japonaise du bain. Les points de vue qui remettent en question, affinent ou élargissent ma compréhension actuelle sont particulièrement précieux.",
     "closingNote": "Les suggestions de personnes, de lieux, de recherches ou d’histoires sont tout aussi bienvenues. Les coordonnées seront ajoutées avant les premiers contacts.",
     "footerText": "Projet documentaire indépendant en développement",
-    "backTop": "Retour en haut ↑"
+    "backTop": "Retour en haut"
   },
   "ja": {
     "skip": "本文へ移動",
@@ -252,7 +252,7 @@ const translations = {
     "closingText": "この企画はまだ形づくられている途中であり、対話そのものがリサーチの一部です。日本の入浴文化に関わって働く方、研究する方、維持する方、利用する方、ものをつくる方のお話をぜひ伺いたいと考えています。現在の理解を問い直し、より正確にし、広げてくれる視点は特に大切です。",
     "closingNote": "人、場所、研究、物語についてのご提案も歓迎しています。最初の連絡を行う前に、ここへ連絡先を追加します。",
     "footerText": "制作準備中の自主ドキュメンタリー企画",
-    "backTop": "ページ上部へ ↑"
+    "backTop": "ページ上部へ"
   }
 };
 
