@@ -2,12 +2,11 @@ const translations = {
   "en": {
     "skip": "Skip to content",
     "navProject": "Project",
+    "navWorld": "World",
     "navQuestions": "Questions",
     "navApproach": "Approach",
     "navAbout": "About",
     "navContact": "Contact",
-    "menuOpen": "Ouvrir le menu",
-    "menuClose": "Fermer le menu",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
     "heroEyebrow": "Independent documentary project · Research & pre-production",
@@ -106,10 +105,13 @@ const translations = {
   "fr": {
     "skip": "Aller au contenu",
     "navProject": "Projet",
+    "navWorld": "Univers",
     "navQuestions": "Questions",
     "navApproach": "Approche",
     "navAbout": "À propos",
     "navContact": "Contact",
+    "menuOpen": "Ouvrir le menu",
+    "menuClose": "Fermer le menu",
     "heroEyebrow": "Projet documentaire indépendant · Recherche & préproduction",
     "heroTitle": "Le Japon à travers sa culture du bain",
     "heroStatement": "Une enquête documentaire sur la culture japonaise du bain, à travers les personnes, les lieux et les savoir-faire qui l’entourent.",
@@ -206,6 +208,7 @@ const translations = {
   "ja": {
     "skip": "本文へ移動",
     "navProject": "企画",
+    "navWorld": "風呂の世界",
     "navQuestions": "問い",
     "navApproach": "取材姿勢",
     "navAbout": "制作者",
@@ -391,7 +394,7 @@ if (menuToggle && primaryNav) {
     }
   });
 
-  window.matchMedia('(min-width: 981px)').addEventListener?.('change', event => {
+  window.matchMedia('(min-width: 1101px)').addEventListener?.('change', event => {
     if (event.matches) setMenuState(false);
   });
 }
