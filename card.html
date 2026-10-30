@@ -23,6 +23,16 @@
     @media(prefers-reduced-motion:no-preference){.identity,.scan-panel{animation:arrive .6s both}.scan-panel{animation-delay:.08s}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
     @media print{:root{color-scheme:light}.page{background:#fff;color:#171612;min-height:auto}main{padding:30px 0}.motif,.waves,.languages,footer{display:none}.role,.project-note,.address{color:#625b51}.project,.topbar,.visit{border-color:#aaa}.qr-frame{box-shadow:none;border:1px solid #ddd}.brand-label{color:#625b51}}
     @media(max-width:700px){.identity>.eyebrow,.identity>.project,.scan-panel>figcaption{display:none}}
+    .scan-space{display:contents}
+    @media(max-width:700px) and (orientation:portrait){
+      .page{height:100svh;min-height:0;padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+      .topbar,footer{width:calc(100% - 24px);flex:none}footer{gap:8px}
+      main{width:100%;min-height:0;flex:1;margin:0 auto;grid-template-rows:auto minmax(0,1fr);gap:clamp(12px,3svh,24px);padding:clamp(12px,3svh,24px) 0}
+      .identity{width:calc(100% - 24px);margin:0 auto}h1{font-size:clamp(36px,11.6vw,56px)}
+      .scan-space{display:grid;place-items:center;container-type:size;min-height:0;width:100%;height:100%}
+      .scan-panel{--qr-size:min(85vw,calc(100cqw - 28px),calc(100cqh - 78px));width:calc(var(--qr-size) + 28px)}
+      .qr-link{width:var(--qr-size);max-width:none}
+    }
   </style>
 </head>
 <body>
@@ -40,6 +50,7 @@
       <p class="role" data-copy="role">Independent documentary filmmaker · France</p>
       <div class="project"><h2 class="project-title" data-copy="title">Japan Through<br>Bathing Culture</h2><p class="project-note" data-copy="note">People, places and the world around the bath.</p></div>
     </section>
+    <div class="scan-space">
     <figure class="scan-panel">
       <div class="qr-frame">
         <p class="qr-heading" data-copy="qrTitle">Discover the documentary project</p>
@@ -50,6 +61,7 @@
       </div>
       <figcaption><a class="visit" href="https://arnaudsyn.github.io/Bath-doc/"><span data-copy="visit">Visit the project website</span><span class="arrow" aria-hidden="true">↗</span></a><p class="address">arnaudsyn.github.io/Bath-doc</p></figcaption>
     </figure>
+    </div>
   </main>
   <footer><p data-copy="footer">Independent documentary project</p><p>温泉 · 銭湯 · 旅館</p></footer>
   <svg class="waves" viewBox="0 0 1000 210" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 70 C160-35 290 180 530 70 S850 5 1080 70"/><path d="M-80 110 C160 5 290 220 530 110 S850 45 1080 110"/><path d="M-80 150 C160 45 290 260 530 150 S850 85 1080 150"/></svg>
