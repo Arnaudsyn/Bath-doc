@@ -34,12 +34,13 @@
       .qr-link{width:var(--qr-size);max-width:none}
     }
     @media(prefers-reduced-motion:no-preference){
-      .waves path{transform-box:view-box;transform-origin:center;animation:water-drift 18s ease-in-out infinite alternate}
-      .waves path:nth-child(2){animation-duration:23s;animation-delay:-8s;animation-direction:alternate-reverse}
-      .waves path:nth-child(3){animation-duration:28s;animation-delay:-16s}
+      .waves{opacity:.23;stroke-width:1.35}
+      .waves path{transform-box:view-box;transform-origin:center;animation:water-drift 7s ease-in-out infinite alternate}
+      .waves path:nth-child(2){animation-duration:9s;animation-delay:-3s;animation-direction:alternate-reverse}
+      .waves path:nth-child(3){animation-duration:11s;animation-delay:-5s}
       @keyframes water-drift{
-        from{transform:translate(-24px,8px) scaleY(.96)}
-        to{transform:translate(24px,-8px) scaleY(1.06)}
+        from{transform:translate(-60px,22px) scaleY(.86)}
+        to{transform:translate(60px,-22px) scaleY(1.13)}
       }
     }
   </style>
