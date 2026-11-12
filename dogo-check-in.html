@@ -40,7 +40,7 @@
     </header>
     <div id="card" hidden>
       <p class="date"><strong id="date-ja"></strong><span class="en" lang="en" id="date-en"></span></p>
-      <section aria-labelledby="hisho">
+      <section id="morning-booking" aria-labelledby="hisho" hidden>
         <h2 id="hisho">飛翔の間</h2>
         <p class="en" lang="en">Hishō no Ma</p>
         <dl>
@@ -48,7 +48,7 @@
           <div><dt>予約ID <span lang="en">/ Reservation ID</span></dt><dd id="id-a"></dd></div>
         </dl>
       </section>
-      <section aria-labelledby="shirasagi">
+      <section id="evening-booking" aria-labelledby="shirasagi" hidden>
         <h2 id="shirasagi">しらさぎの間</h2>
         <p class="en" lang="en">Shirasagi no Ma</p>
         <dl>
@@ -65,7 +65,21 @@
     <p id="notice" class="notice">ご予約内容を表示するには、予約確認用のリンクを開いてください。<span class="en" lang="en">Open the full check-in link to display your reservation details.</span></p>
   </main>
   <script>
+    let switchTimer;
+
+    function showBooking(cutoff) {
+      clearTimeout(switchTimer);
+      const millisecondsUntilSwitch = cutoff - Date.now();
+      const showMorning = millisecondsUntilSwitch > 0;
+      document.getElementById('morning-booking').hidden = !showMorning;
+      document.getElementById('evening-booking').hidden = showMorning;
+      if (showMorning) {
+        switchTimer = setTimeout(() => showBooking(cutoff), Math.min(millisecondsUntilSwitch, 2_147_483_647));
+      }
+    }
+
     function renderCard() {
+      clearTimeout(switchTimer);
       const params = new URLSearchParams(location.hash.slice(1));
       const dateText = params.get('d') || '';
       const date = new Date(`${dateText}T00:00:00Z`);
@@ -86,9 +100,15 @@
         'time-a': timeA, 'id-a': idA, 'time-b': timeB, 'id-b': idB, 'name-ja': nameJa, 'name-en': nameEn
       };
       for (const [id, value] of Object.entries(values)) document.getElementById(id).textContent = value;
+      // The switch follows the booking date in Japan, regardless of the device's time zone.
+      showBooking(Date.parse(`${dateText}T13:00:00+09:00`));
     }
     renderCard();
     window.addEventListener('hashchange', renderCard);
+    window.addEventListener('pageshow', renderCard);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) renderCard();
+    });
   </script>
 </body>
 </html>
